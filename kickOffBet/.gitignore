@@ -1,0 +1,67 @@
+# Archivos compilados y ejecutables
+*.exe
+*.out
+*.app
+*.obj
+*.o
+*.so
+*.dll
+*.dylib
+
+# Archivos de Visual Studio
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+*.vcxproj.filters
+*.vcxproj.user
+
+# Directorios de compilación
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Bb]in/
+[Oo]bj/
+[Ll]og/
+[Ll]ogs/
+
+# Archivos de IntelliSense
+*.VC.db
+*.VC.opendb
+*.VC.VC.opendb
+ipch/
+
+# Archivos temporales
+*.tmp
+*.temp
+*.log
+*.tlog
+*.ilk
+*.pdb
+*.idb
+*.pgc
+*.pgd
+*.rsp
+*.sbr
+*.tlb
+*.bsc
+*.exp
+
+# Archivos de caché
+.vs/
+*.sdf
+*.opensdf
+*.suo
+*.ncb
+*.aps
+
+# Archivos de pruebas
+[Tt]est[Rr]esult*/
+[Bb]uild[Ll]og.*
+
+# Sistema operativo
+.DS_Store
+Thumbs.db
+desktop.ini
