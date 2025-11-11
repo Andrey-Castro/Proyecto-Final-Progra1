@@ -6,20 +6,21 @@
 #include <cstdlib>
 #include <iomanip>  
 #include <sstream>
-#include <ctime>
 using namespace std;
 
 struct Usuario {
-    string nombre = "";
-    string apellidos = "";
-    int edad = 0;
-    string correo = "";
-    string cedula = "";
-    string cuentaBancaria = "";
-    string telefono = "";
-    double saldo = 0.0;
+    string nombre;
+    string apellidos;
+    int edad;
+    string correo;
+    string cedula;
+    string cuentaBancaria;
+    string telefono;
+    double saldo;
 };
 
+
+// ⬇️ AGREGAR ESTAS DOS ESTRUCTURAS AQUÍ ⬇️
 struct Partido {
     int id = 0;
     string liga = "";
@@ -38,12 +39,15 @@ struct Apuesta {
     double monto = 0.0;
 };
 
+
 bool esMayorDeEdad(int edad);
 void registrarUsuario();
 void iniciarSesion();
 void menuUsuario(Usuario& u);
 void depositarDinero(Usuario& u);
 void actualizarSaldoEnArchivo(const Usuario& u);
+
+// ⬇️ AGREGAR ESTAS DECLARACIONES AQUÍ ⬇️
 void verPartidosDisponibles();
 void crearApuesta(Usuario& u);
 void verMisApuestas(const Usuario& u);
@@ -52,7 +56,7 @@ vector<Partido> cargarPartidos();
 void guardarApuesta(const Usuario& u, const vector<Apuesta>& apuestas, double cuotaTotal, double montoTotal);
 
 int main() {
-    inicializarPartidos(); // Crear partidos de ejemplo
+    inicializarPartidos();
     int opcion;
 
     do {
@@ -73,6 +77,7 @@ int main() {
         case 2:
             iniciarSesion();
             break;
+
         case 3:
             cout << "\nGracias por visitar KickOffBet. ¡Hasta pronto!\n";
             break;
@@ -115,7 +120,7 @@ void registrarUsuario() {
     cout << "Número de teléfono: ";
     cin >> u.telefono;
 
-    u.saldo = 100.0;
+    u.saldo = 100.0; // saldo inicial ficticio
 
     ofstream archivo("usuarios.txt", ios::app);
     if (archivo.is_open()) {
@@ -140,7 +145,6 @@ void registrarUsuario() {
 bool esMayorDeEdad(int edad) {
     return edad >= 18;
 }
-
 void iniciarSesion() {
     string correo, cedula;
     cout << "\n=== INICIO DE SESIÓN ===\n";
@@ -167,21 +171,21 @@ void iniciarSesion() {
         getline(archivo, tel, ',');
         getline(archivo, saldoStr, '\n');
 
-        if (correoLeido == correo && cedulaLeida == cedula) {
+        if (correoLeido == correo && cedulaLeida == cedula)
             u.nombre = nombre;
-            u.apellidos = apellidos;
-            u.edad = stoi(edadStr);
-            u.correo = correoLeido;
-            u.cedula = cedulaLeida;
-            u.cuentaBancaria = cuenta;
-            u.telefono = tel;
-            u.saldo = stod(saldoStr);
-
+        u.apellidos = apellidos;
+        u.edad = stoi(edadStr);
+        u.correo = correoLeido;
+        u.cedula = cedulaLeida;
+        u.cuentaBancaria = cuenta;
+        u.telefono = tel;
+        u.saldo = stod(saldoStr); {
             cout << "\n👤 Bienvenido de nuevo, " << nombre << " " << apellidos << "!\n";
-            cout << "Saldo actual: $" << fixed << setprecision(2) << u.saldo << endl;
+            cout << "Saldo actual: $" << saldoStr << endl;
             encontrado = true;
 
             menuUsuario(u);
+
             break;
         }
     }
@@ -192,7 +196,6 @@ void iniciarSesion() {
 
     archivo.close();
 }
-
 void menuUsuario(Usuario& u) {
     int opcion;
     do {
@@ -213,16 +216,17 @@ void menuUsuario(Usuario& u) {
         case 2:
             depositarDinero(u);
             break;
-        case 3:
-            verPartidosDisponibles();
-            break;
-        case 4:
-            crearApuesta(u);
-            break;
-        case 5:
-            verMisApuestas(u);
-            break;
-        case 6:
+        case 3:                          // ⬅️ NUEVO
+            verPartidosDisponibles();    // ⬅️ NUEVO
+            break;                       // ⬅️ NUEVO
+        case 4:                          // ⬅️ NUEVO
+            crearApuesta(u);             // ⬅️ NUEVO
+            break;                       // ⬅️ NUEVO
+        case 5:                          // ⬅️ NUEVO
+            verMisApuestas(u);           // ⬅️ NUEVO
+            break;                       // ⬅️ NUEVO
+        case 6:                          // ⬅️ CAMBIÓ DE 3 A 6
+       
             cout << "\n👋 Sesión cerrada. ¡Hasta pronto, " << u.nombre << "!\n";
             break;
         default:
@@ -271,6 +275,7 @@ void actualizarSaldoEnArchivo(const Usuario& u) {
         campos.push_back(temp);
 
         if (campos.size() == 8 && campos[3] == u.correo && campos[4] == u.cedula) {
+            // ✅ guarda el saldo correctamente con 2 decimales
             campos[7] = to_string(u.saldo);
         }
 
@@ -290,7 +295,6 @@ void actualizarSaldoEnArchivo(const Usuario& u) {
     }
     archivoSalida.close();
 }
-
 void inicializarPartidos() {
     ofstream archivo("partidos.txt", ios::trunc);
     if (archivo.is_open()) {
