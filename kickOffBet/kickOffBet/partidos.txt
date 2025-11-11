@@ -1,0 +1,13 @@
+1,La Liga,Real Madrid,Barcelona,2.10,3.40,3.20,2024-12-15
+2,La Liga,Atletico Madrid,Sevilla,1.85,3.50,4.00,2024-12-16
+3,La Liga,Valencia,Villarreal,2.50,3.20,2.80,2024-12-17
+4,Premier League,Manchester City,Liverpool,2.30,3.60,2.90,2024-12-15
+5,Premier League,Arsenal,Chelsea,2.20,3.30,3.10,2024-12-16
+6,Premier League,Manchester United,Tottenham,2.60,3.40,2.70,2024-12-17
+7,Serie A,Juventus,Inter Milan,2.40,3.20,2.95,2024-12-15
+8,Serie A,AC Milan,Napoli,2.35,3.25,3.00,2024-12-16
+9,Serie A,Roma,Lazio,2.15,3.30,3.40,2024-12-17
+10,Bundesliga,Bayern Munich,Borussia Dortmund,1.90,3.70,3.80,2024-12-15
+11,Bundesliga,RB Leipzig,Bayer Leverkusen,2.25,3.40,3.00,2024-12-16
+12,Ligue 1,PSG,Marseille,1.75,3.80,4.50,2024-12-15
+13,Ligue 1,Lyon,Monaco,2.45,3.30,2.85,2024-12-16

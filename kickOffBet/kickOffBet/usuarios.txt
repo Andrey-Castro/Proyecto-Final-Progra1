@@ -1,4 +1,2 @@
-Andrey,Castro Matarrita,18,ajcastro@gmial.com,504700192,cr21452383846,83765924,100
-Danna,Villafuerte,18,danvilla@gmail.com,504720920\,1000,61825792,100
-Danna,Villafuerte,18,danna@gmail,504720920,100,61825792,100
-issa,villa,20,dann,666,0,6122,600.000000
+Andrey,Castro Matarrita,18,ajcastro@gmial.com,504700192,cr21452383846,83765924,200.000000
+Andrey,Castro M,18,ajcastro@gmail.com,504700192,CR29101828929,83765924,0.000000
