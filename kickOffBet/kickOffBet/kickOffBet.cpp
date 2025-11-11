@@ -4,6 +4,8 @@
 #include <limits>
 #include <vector>
 #include <cstdlib>
+#include <iomanip>  
+#include <sstream>
 using namespace std;
 
 struct Usuario {
@@ -21,6 +23,9 @@ struct Usuario {
 bool esMayorDeEdad(int edad);
 void registrarUsuario();
 void iniciarSesion();
+void menuUsuario(Usuario& u);
+void depositarDinero(Usuario& u);
+void actualizarSaldoEnArchivo(const Usuario& u);
 
 int main() {
     int opcion;
@@ -124,7 +129,7 @@ void iniciarSesion() {
         cout << "⚠️ No se pudo abrir el archivo de usuarios.\n";
         return;
     }
-
+    Usuario u;
     string nombre, apellidos, edadStr, correoLeido, cedulaLeida, cuenta, tel, saldoStr;
     bool encontrado = false;
 
@@ -138,9 +143,19 @@ void iniciarSesion() {
         getline(archivo, saldoStr, '\n');
 
         if (correoLeido == correo && cedulaLeida == cedula) {
+            // ✅ Cargar correctamente todos los datos del usuario
+            u.nombre = nombre;
+            u.apellidos = apellidos;
+            u.edad = stoi(edadStr);
+            u.correo = correoLeido;
+            u.cedula = cedulaLeida;
+            u.cuentaBancaria = cuenta;
+            u.telefono = tel;
+            u.saldo = stod(saldoStr);
             cout << "\n👤 Bienvenido de nuevo, " << nombre << " " << apellidos << "!\n";
             cout << "Saldo actual: $" << saldoStr << endl;
             encontrado = true;
+            menuUsuario(u);
             break;
         }
     }
@@ -150,4 +165,90 @@ void iniciarSesion() {
     }
 
     archivo.close();
+}
+void menuUsuario(Usuario& u) {
+    int opcion;
+    do {
+        cout << "\n=== MENÚ DEL USUARIO ===\n";
+        cout << "1. Consultar saldo\n";
+        cout << "2. Depositar dinero\n";
+        cout << "3. Cerrar sesión\n";
+        cout << "Seleccione una opción: ";
+        cin >> opcion;
+
+        switch (opcion) {
+        case 1:
+            cout << "\n💰 Tu saldo actual es: $" << fixed << setprecision(2) << u.saldo << endl;
+            break;
+        case 2:
+            depositarDinero(u);
+            break;
+        case 3:
+            cout << "\n👋 Sesión cerrada. ¡Hasta pronto, " << u.nombre << "!\n";
+            break;
+        default:
+            cout << "⚠ Opción no válida.\n";
+        }
+    } while (opcion != 3);
+}
+
+void depositarDinero(Usuario& u) {
+    double monto;
+    cout << "\n=== DEPÓSITO DE DINERO ===\n";
+    cout << "Ingrese el monto a depositar: $";
+    cin >> monto;
+
+    if (monto <= 0) {
+        cout << "⚠ El monto debe ser mayor que 0.\n";
+        return;
+    }
+
+    u.saldo += monto;
+    actualizarSaldoEnArchivo(u);
+    cout << "✅ Depósito exitoso. Nuevo saldo: $" << fixed << setprecision(2) << u.saldo << endl;
+}
+
+void actualizarSaldoEnArchivo(const Usuario& u) {
+    ifstream archivoEntrada("usuarios.txt");
+    if (!archivoEntrada.is_open()) {
+        cout << "⚠ No se pudo abrir el archivo para actualizar el saldo.\n";
+        return;
+    }
+
+    vector<string> lineas;
+    string linea;
+    while (getline(archivoEntrada, linea)) {
+        vector<string> campos;
+        string temp;
+        for (char c : linea) {
+            if (c == ',') {
+                campos.push_back(temp);
+                temp.clear();
+            }
+            else {
+                temp += c;
+            }
+        }
+        campos.push_back(temp);
+
+        if (campos.size() == 8 && campos[3] == u.correo && campos[4] == u.cedula) {
+            // ✅ guarda el saldo correctamente con 2 decimales
+            campos[7] = to_string(u.saldo);
+        }
+
+        string nuevaLinea;
+        for (size_t i = 0; i < campos.size(); ++i) {
+            nuevaLinea += campos[i];
+            if (i != campos.size() - 1)
+                nuevaLinea += ",";
+        }
+        lineas.push_back(nuevaLinea);
+    }
+    archivoEntrada.close();
+
+    ofstream archivoSalida("usuarios.txt", ios::trunc);
+    for (const auto& l : lineas) {
+        archivoSalida << l << endl;
+    }
+    archivoSalida.close();
 }
