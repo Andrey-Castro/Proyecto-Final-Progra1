@@ -8,6 +8,7 @@
 #include <sstream>
 using namespace std;
 
+
 struct Usuario {
     string nombre;
     string apellidos;
