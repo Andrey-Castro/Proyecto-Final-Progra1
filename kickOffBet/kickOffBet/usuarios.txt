@@ -1,2 +1,4 @@
 Andrey,Castro Matarrita,18,ajcastro@gmial.com,504700192,cr21452383846,83765924,200.000000
 Andrey,Castro M,18,ajcastro@gmail.com,504700192,CR29101828929,83765924,0.000000
+Geral,Mu¤oz,25,munozgerald394@gmail.com,504350073,2,87574550,100
+danna,villa,18,danvilla27@gmail.com,504720920,100,61825792,100

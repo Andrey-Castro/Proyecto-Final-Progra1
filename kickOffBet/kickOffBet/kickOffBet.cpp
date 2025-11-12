@@ -8,6 +8,17 @@
 #include <sstream>
 using namespace std;
 
+// 🎨 COLORES ANSI
+#define RESET "\033[0m"
+#define ROJO "\033[31m"
+#define VERDE "\033[32m"
+#define AMARILLO "\033[33m"
+#define AZUL "\033[34m"
+#define MAGENTA "\033[35m"
+#define CIAN "\033[36m"
+#define BLANCO "\033[37m"
+#define NEGRITA "\033[1m"
+
 struct Usuario {
     string nombre;
     string apellidos;
@@ -60,10 +71,10 @@ int main() {
     int opcion;
 
     do {
-        cout << "\n=====================================\n";
-        cout << "         🏆  KickOffBet  🏆\n";
-        cout << "    Sistema de Apuestas Deportivas\n";
-        cout << "=====================================\n";
+        cout << AMARILLO <<"\n=====================================\n";
+        cout << VERDE << "        🏆  KickOffBet  🏆\n";
+        cout << CIAN <<"    Sistema de Apuestas Deportivas\n";
+        cout << AMARILLO << "=====================================\n";
         cout << "1. Registrar nuevo jugador\n";
         cout << "2. Iniciar Sesion\n";
         cout << "3. Salir\n";
@@ -79,10 +90,10 @@ int main() {
             break;
 
         case 3:
-            cout << "\nGracias por visitar KickOffBet. ¡Hasta pronto!\n";
+            cout << VERDE << "\nGracias por visitar KickOffBet. ¡Hasta pronto!\n";
             break;
         default:
-            cout << "⚠  Opción no válida. Intente de nuevo.\n";
+            cout << ROJO << "⚠  Opción no válida. Intente de nuevo.\n";
         }
     } while (opcion != 3);
 
